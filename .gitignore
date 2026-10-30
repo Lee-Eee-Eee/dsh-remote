@@ -1,0 +1,14 @@
+# Local runtime and editor noise
+node_modules/
+tmp/
+*.log
+*.bak-*
+.DS_Store
+Thumbs.db
+
+# Per-target install artifacts produced by the tests against a real machine
+tests/.artifacts/
+
+# Internal design notes for the original implementation request; they contain
+# private host names and local paths, so they stay out of the public repo.
+REQUIREMENTS.md

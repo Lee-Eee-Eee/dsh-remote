@@ -1,0 +1,27 @@
+# Host-independent checks: parse every module, then run the tests that need no
+# remote machine. The WSL/SSH tests (tests/embed-auth.mjs, tests/http-live.mjs,
+# tests/e2e-wsl.mjs, tests/cycle-wsl.mjs) need a real target and run locally.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Parse every module
+        run: |
+          for file in client.js lib/*.js tests/*.mjs; do
+            node --check "$file"
+          done
+      - name: Configuration porting (text surgery)
+        run: node tests/yaml-blocks.mjs
+      - name: Route family (fence, CRUD, preview redaction)
+        run: node tests/routes.mjs

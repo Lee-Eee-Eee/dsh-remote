@@ -1,0 +1,9 @@
+# dsh-remote bundle patch: inserts the dual-face plugin row into the profile
+# roster. The node half (exports ".") runs in the host process — target store,
+# SSH/WSL channels, probe, bootstrap, tunnel, tunnel-backed /api/dsh-remote
+# routes. The `dsh.client` declaration in package.json makes the browser half
+# (exports "./client", served as /plugins/dsh-remote/client.js) register the
+# "Remote" sidebar entry and its center-column page.
+- insert:
+    - id: remote
+      name: dsh-remote

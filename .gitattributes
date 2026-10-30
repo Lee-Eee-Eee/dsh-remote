@@ -1,0 +1,7 @@
+# Keep the working tree LF on every platform: the shell scripts this plugin
+# sends to a remote bash are embedded in JavaScript, so CRLF would leak into
+# them, and the tests diff exact bytes of YAML files.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.webp binary

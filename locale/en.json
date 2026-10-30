@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Remote Workspace",
+    "description": "Turn an SSH host or WSL distribution into a DSH workspace: discover targets, install dsh remotely without sudo, tunnel it back, and work in the remote UI inside a sidebar panel."
+  }
+}

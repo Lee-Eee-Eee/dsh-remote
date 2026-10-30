@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Remote workspace">
+  <defs>
+    <linearGradient id="dr-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f6fec"/>
+      <stop offset="1" stop-color="#1b47a8"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#dr-bg)"/>
+  <!-- monitor -->
+  <rect x="15" y="16" width="34" height="24" rx="4.5" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <path d="M32 40v6" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <path d="M24.5 48.5h15" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <!-- uplink arrow into the monitor -->
+  <path d="M20 28h9" stroke="#9fd0ff" stroke-width="3" stroke-linecap="round"/>
+  <path d="M25.5 23.5l5 4.5-5 4.5" fill="none" stroke="#9fd0ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- live dot -->
+  <circle cx="42" cy="28" r="3.4" fill="#4ade80"/>
+</svg>

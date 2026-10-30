@@ -1,0 +1,70 @@
+{
+  "name": "dsh-remote",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Turn any SSH host or WSL distribution into a DSH workspace: discover targets, install dsh remotely without sudo, port the local model configuration, and drive the remote DSH UI inside a sidebar panel of the local one.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "icon": "./icon.svg",
+  "files": [
+    "lib",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "README.en.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "dsh": {
+    "engines": {
+      "dsh": ">=0.2.1-rc.2"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-slots"
+      ]
+    }
+  },
+  "scripts": {
+    "test": "node tests/yaml-blocks.mjs && node tests/routes.mjs",
+    "test:embed": "node tests/embed-auth.mjs",
+    "test:http": "node tests/http-live.mjs",
+    "test:e2e": "node tests/e2e-wsl.mjs --install --start"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "remote",
+    "ssh",
+    "wsl",
+    "workspace"
+  ],
+  "author": "Lee-Eee-Eee",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lee-Eee-Eee/dsh-remote.git"
+  },
+  "homepage": "https://github.com/Lee-Eee-Eee/dsh-remote#readme",
+  "bugs": {
+    "url": "https://github.com/Lee-Eee-Eee/dsh-remote/issues"
+  },
+  "license": "MIT"
+}
