@@ -14,6 +14,7 @@
  * Run: node tests/embed-auth.mjs
  */
 import assert from 'node:assert/strict'
+import http from 'node:http'
 import net from 'node:net'
 import { existsSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -27,9 +28,8 @@ const log = (...parts) => console.log(...parts)
 
 /** Fetch a page and return its status and body. */
 async function get(port, path) {
-  const http = await import('node:http')
   return new Promise((resolve) => {
-    const request = http.default.request({ host: '127.0.0.1', port, path, method: 'GET', headers: { host: `127.0.0.1:${port}` } }, (response) => {
+    const request = http.request({ host: '127.0.0.1', port, path, method: 'GET', headers: { host: `127.0.0.1:${port}` } }, (response) => {
       const chunks = []
       response.on('data', (chunk) => chunks.push(chunk))
       response.on('end', () => resolve({ status: response.statusCode ?? 0, body: Buffer.concat(chunks).toString('utf8') }))
@@ -39,8 +39,17 @@ async function get(port, path) {
   })
 }
 
-/** Send a raw WebSocket-style upgrade through the proxy and read the status line. */
-function upgradeStatus(port, path) {
+/**
+ * Send a raw WebSocket-style upgrade through the proxy, with the browser
+ * markers a cross-site iframe actually sends, and report the status line plus
+ * how many bytes the upstream pushed within `holdMs`.
+ * @param {number} port - proxy port.
+ * @param {string} path - upgrade path.
+ * @param {string[]} headers - extra request header lines.
+ * @param {number} [holdMs] - how long to keep reading.
+ * @returns {Promise<{statusLine: string, bytes: number}>} outcome.
+ */
+function upgradeStatus(port, path, headers = [], holdMs = 3000) {
   return new Promise((resolve) => {
     const socket = net.connect(port, '127.0.0.1', () => {
       socket.write([
@@ -51,27 +60,56 @@ function upgradeStatus(port, path) {
         'Sec-WebSocket-Version: 13',
         'Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==',
         'Sec-WebSocket-Protocol: dsh-v1',
+        ...headers,
         '',
         '',
       ].join('\r\n'))
     })
-    let received = ''
+    let received = Buffer.alloc(0)
+    let statusLine = ''
     const timer = setTimeout(() => {
       socket.destroy()
-      resolve(received)
-    }, 6000)
+      resolve({ statusLine, bytes: received.length })
+    }, holdMs)
     socket.on('data', (chunk) => {
-      received += chunk.toString('utf8')
-      if (received.includes('\r\n')) {
-        clearTimeout(timer)
-        socket.destroy()
-        resolve(received)
+      received = Buffer.concat([received, chunk])
+      if (statusLine === '') {
+        const text = received.toString('utf8')
+        const index = text.indexOf('\r\n')
+        if (index >= 0) statusLine = text.slice(0, index)
       }
     })
     socket.on('error', () => {
       clearTimeout(timer)
-      resolve(received)
+      resolve({ statusLine: statusLine || 'SOCKET ERROR', bytes: received.length })
     })
+  })
+}
+
+/** POST one JSON body through the proxy with the browser's cross-site markers. */
+function postJson(port, path, body) {
+  return new Promise((resolve) => {
+    const payload = JSON.stringify(body)
+    const request = http.request({
+      host: '127.0.0.1',
+      port,
+      path,
+      method: 'POST',
+      headers: {
+        host: `127.0.0.1:${port}`,
+        'content-type': 'application/json',
+        'content-length': Buffer.byteLength(payload),
+        origin: `http://127.0.0.1:${port}`,
+        'sec-fetch-site': 'cross-site',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-dest': 'empty',
+      },
+    }, (response) => {
+      response.resume()
+      resolve(response.statusCode ?? 0)
+    })
+    request.on('error', () => resolve(0))
+    request.end(payload)
   })
 }
 
@@ -95,9 +133,28 @@ try {
   assert.ok(assets.status === 200 || assets.status === 404, 'asset requests are proxied, not rejected')
   log(`GET /assets/... -> ${assets.status}`)
 
-  const upgrade = await upgradeStatus(port, '/api/remote.mux')
-  assert.match(upgrade, /HTTP\/1\.1 (101|400|401|403)/, 'the upgrade reaches the remote')
-  log(`WebSocket upgrade through the proxy -> ${upgrade.split('\r\n')[0]}`)
+  // The desktop page is on a custom `app` origin, so the iframe's requests
+  // carry cross-site markers. The remote's /api fence rejects a foreign Origin
+  // and `Sec-Fetch-Site: cross-site`; the proxy must present them as
+  // same-origin, or the mux never connects and the UI stays on "reconnecting".
+  const browserHeaders = [
+    `Origin: ${url.origin}`,
+    'Sec-Fetch-Site: cross-site',
+    'Sec-Fetch-Mode: websocket',
+    'Sec-Fetch-Dest: empty',
+  ]
+  const upgrade = await upgradeStatus(port, '/api/remote.mux', browserHeaders)
+  assert.equal(upgrade.statusLine, 'HTTP/1.1 101 Switching Protocols', 'the mux upgrade must not be fenced out')
+  assert.ok(upgrade.bytes > 0, 'the mux must push frames, not hang half-open')
+  log(`WebSocket upgrade with browser markers -> ${upgrade.statusLine} (${upgrade.bytes} bytes)`)
+
+  const appOrigin = await upgradeStatus(port, '/api/remote.mux', ['Origin: app://dsh', 'Sec-Fetch-Site: cross-site'])
+  assert.equal(appOrigin.statusLine, 'HTTP/1.1 101 Switching Protocols', 'a custom app origin must work too')
+  log(`WebSocket upgrade with app:// origin -> ${appOrigin.statusLine}`)
+
+  const apiPost = await postJson(port, '/api/settings/describe', {})
+  assert.notEqual(apiPost, 403, 'API calls with a browser Origin must pass the fence')
+  log(`POST /api/settings/describe with Origin -> ${apiPost} (not 403)`)
 
   // A stopped target must stop serving through the proxy.
   await manager.stop(created.id)
