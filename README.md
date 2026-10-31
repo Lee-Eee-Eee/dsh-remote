@@ -81,7 +81,9 @@ DSH 的登录 cookie 绑定 `host:port`（实测：cookie 里写着 `authority: 
 2. iframe 指向本机一个 loopback 反向代理（`127.0.0.1:<proxyPort>`），代理把每个请求/WebSocket 升级转发给远程，并补上 `Cookie`、把 `Host` 改写成远程绑定的 authority；
 3. 上游返回 401 时自动重新握手并重试一次；响应里的 `Set-Cookie` 一律不回给浏览器。
 
-于是浏览器看到一个普通 HTTP 服务，远程看到的是第一方请求，页面 URL 里不再有 token。健康检查就是"经代理匿名 GET `/` 必须 200"——之前"绿灯 + 嵌着 401"的假成功从此不可能出现。
+还有一道围栏要一起处理：远程 `/api` 会校验 `Origin` 是否等于自己的 authority，并拒绝 `Sec-Fetch-Site: cross-site`。iframe 发来的这两个标记天然不匹配（页面在 `app` origin），结果是页面能渲染、但 `/api` 与 mux 的 WebSocket 全被 403 —— 界面一直卡在「重新连接中」。代理因此把 `Origin` / `Referer` 改写成上游 authority、把 `Sec-Fetch-Site` 设为 `same-origin`，这正是第一方请求本来的样子。
+
+于是浏览器看到一个普通 HTTP 服务，远程看到的是第一方请求，页面 URL 里不再有 token。健康检查就是"经代理匿名 GET `/` 必须 200"——之前"绿灯 + 嵌着 401"的假成功从此不可能出现；`tests/embed-auth.mjs` 另外断言带 `Origin` / 跨站标记的 WebSocket 升级必须拿到 101 且收到数据帧。
 
 **5. 远程 dsh 用 `--port P` 而不是 `--port 0`。**
 需求文档建议 `--port 0` 让系统分配；但那样拿到的端口无法与本机隧道端口对齐（见第 2 条）。改为：随机取一个端口，**先在本地和远程各做一次占用检查**再启动，失败就换一个。
