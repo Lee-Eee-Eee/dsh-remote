@@ -1,0 +1,21 @@
+{
+  "renderer": "Matplotlib",
+  "matplotlib_version": "3.9.2",
+  "style": "ohmyplt: Arial labels and Times New Roman math/numerals",
+  "kind": "conceptual diagrams derived from implementation; no benchmark data",
+  "input_text_normalization": "LF",
+  "inputs": {
+    "docs/figures/render.py": "11bdeb0716698446e015ba46758ac4544777ed4e0db5375ed0545ee5ee172b43",
+    "lib/manager.js": "9ecffb6d1d4df441fc0901c487d1aa3066614a0a468fa7fcc0e05a35e401fc78",
+    "lib/frame-proxy.js": "561783677a711e349127b86a3de368942dafe3c0372373d36580afc7d83f44ae",
+    "lib/channel.js": "3a4890a145f5f9aa012670c02174b0d2a140e58dc13bd997f79e72faa63fd2c2",
+    "client.js": "d78cb78d0901a13c3b728e31ea8a984c7d43183202fd5d2e3762c3838c216ccb"
+  },
+  "outputs": {
+    "architecture.svg": "d35c9807e618f52a92e5945f736a4d13bf42a5422fb0397406130dd403e4b2bc",
+    "workflow.svg": "e2bb2cd354632b34081f230eab916767c7496399aac8feaec0b6ae396a3ff953",
+    "architecture.png": "6d12e78120aa15a37217eb53a16ba41342d8f577b309caa51721a926dbffc744",
+    "remote-workspace.png": "eb54f1b5ad109ffdf0feeab1a58c74be448b77a97470aa81f7415eb2eb1afb1c",
+    "workflow.png": "3fc4bbfdd9acc25a533d21d980c17dc41be4f1805878f10a2cc48d5142e412df"
+  }
+}

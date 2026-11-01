@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1152pt" height="525.6pt" viewBox="0 0 1152 525.6" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.9.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 525.6
+L 1152 525.6
+L 1152 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 53.28 374.4
+L 252.72 374.4
+Q 262.8 374.4 262.8 364.32
+L 262.8 139.68
+Q 262.8 129.6 252.72 129.6
+L 53.28 129.6
+Q 43.2 129.6 43.2 139.68
+L 43.2 364.32
+Q 43.2 374.4 53.28 374.4
+z
+" clip-path="url(#pc639aebd0e)" style="fill: #f6f9fc; stroke: #cdd8e2; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 298.08 374.4
+L 745.92 374.4
+Q 756 374.4 756 364.32
+L 756 139.68
+Q 756 129.6 745.92 129.6
+L 298.08 129.6
+Q 288 129.6 288 139.68
+L 288 364.32
+Q 288 374.4 298.08 374.4
+z
+" clip-path="url(#pc639aebd0e)" style="fill: #f6f9fc; stroke: #cdd8e2; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 791.28 374.4
+L 1098.72 374.4
+Q 1108.8 374.4 1108.8 364.32
+L 1108.8 139.68
+Q 1108.8 129.6 1098.72 129.6
+L 791.28 129.6
+Q 781.2 129.6 781.2 139.68
+L 781.2 364.32
+Q 781.2 374.4 791.28 374.4
+z
+" clip-path="url(#pc639aebd0e)" style="fill: #f6f9fc; stroke: #cdd8e2; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 71.28 327.6
+L 234.72 327.6
+Q 244.8 327.6 244.8 317.52
+L 244.8 204.48
+Q 244.8 194.4 234.72 194.4
+L 71.28 194.4
+Q 61.2 194.4 61.2 204.48
+L 61.2 317.52
+Q 61.2 327.6 71.28 327.6
+z
+" clip-path="url(#pc639aebd0e)" style="fill: #ffffff; stroke: #cdd8e2; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 316.08 327.6
+L 493.92 327.6
+Q 504 327.6 504 317.52
+L 504 204.48
+Q 504 194.4 493.92 194.4
+L 316.08 194.4
+Q 306 194.4 306 204.48
+L 306 317.52
+Q 306 327.6 316.08 327.6
+z
+" clip-path="url(#pc639aebd0e)" style="fill: #ffffff; stroke: #cdd8e2; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 560.88 327.6
+L 727.92 327.6
+Q 738 327.6 738 317.52
+L 738 204.48
+Q 738 194.4 727.92 194.4
+L 560.88 194.4
+Q 550.8 194.4 550.8 204.48
+L 550.8 317.52
+Q 550.8 327.6 560.88 327.6
+z
+" clip-path="url(#pc639aebd0e)" style="fill: #ffffff; stroke: #cdd8e2; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 809.28 327.6
+L 1080.72 327.6
+Q 1090.8 327.6 1090.8 317.52
+L 1090.8 204.48
+Q 1090.8 194.4 1080.72 194.4
+L 809.28 194.4
+Q 799.2 194.4 799.2 204.48
+L 799.2 317.52
+Q 799.2 327.6 809.28 327.6
+z
+" clip-path="url(#pc639aebd0e)" style="fill: #ffffff; stroke: #cdd8e2; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 244.8 259.2
+Q 275.4 259.2 304.099342 259.2
+" clip-path="url(#pc639aebd0e)" style="fill: none; stroke: #2463b7; stroke-width: 1.7; stroke-linecap: round"/>
+    <path d="M 298.099342 256.2
+L 304.099342 259.2
+L 298.099342 262.2
+z
+" clip-path="url(#pc639aebd0e)" style="fill: #2463b7; stroke: #2463b7; stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 504 259.2
+Q 527.4 259.2 548.899342 259.2
+" clip-path="url(#pc639aebd0e)" style="fill: none; stroke: #2463b7; stroke-width: 1.7; stroke-linecap: round"/>
+    <path d="M 542.899342 256.2
+L 548.899342 259.2
+L 542.899342 262.2
+z
+" clip-path="url(#pc639aebd0e)" style="fill: #2463b7; stroke: #2463b7; stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 738 259.2
+Q 768.6 259.2 797.299342 259.2
+" clip-path="url(#pc639aebd0e)" style="fill: none; stroke: #2463b7; stroke-width: 1.7; stroke-linecap: round"/>
+    <path d="M 791.299342 256.2
+L 797.299342 259.2
+L 791.299342 262.2
+z
+" clip-path="url(#pc639aebd0e)" style="fill: #2463b7; stroke: #2463b7; stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 53.28 465.84
+L 1098.72 465.84
+Q 1108.8 465.84 1108.8 455.76
+L 1108.8 412.56
+Q 1108.8 402.48 1098.72 402.48
+L 53.28 402.48
+Q 43.2 402.48 43.2 412.56
+L 43.2 455.76
+Q 43.2 465.84 53.28 465.84
+z
+" clip-path="url(#pc639aebd0e)" style="fill: #edf5f3; stroke: #bcd9d1; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="fill: #172b40; font: 700 27px 'Arial'; text-anchor: start" x="43.2" y="50.4" transform="rotate(-0 43.2 50.4)">Remote compute. Local workspace.</text>
+   </g>
+   <g id="text_2">
+    <text style="fill: #54677a; font: 14px 'Arial'; text-anchor: start" x="43.2" y="80.64" transform="rotate(-0 43.2 80.64)">DSH Remote  /  SSH request path and authentication</text>
+   </g>
+   <g id="text_3">
+    <text style="fill: #54677a; font: 700 12px 'Arial'; text-anchor: start" x="59.04" y="158.349375" transform="rotate(-0 59.04 158.349375)">LOCAL DSH</text>
+   </g>
+   <g id="text_4">
+    <text style="fill: #54677a; font: 700 12px 'Arial'; text-anchor: start" x="303.84" y="158.349375" transform="rotate(-0 303.84 158.349375)">LOCAL HOST PROCESS</text>
+   </g>
+   <g id="text_5">
+    <text style="fill: #54677a; font: 700 12px 'Arial'; text-anchor: start" x="797.04" y="158.349375" transform="rotate(-0 797.04 158.349375)">REMOTE LINUX</text>
+   </g>
+   <g id="text_6">
+    <text style="fill: #172b40; font: 700 18px 'Arial'; text-anchor: start" x="75.6" y="227.444063" transform="rotate(-0 75.6 227.444063)">Embedded UI</text>
+   </g>
+   <g id="text_7">
+    <text style="fill: #54677a; font: 12.5px 'Arial'" transform="translate(75.6 258.067266)">Conversations</text>
+    <text style="fill: #54677a; font: 12.5px 'Arial'" transform="translate(75.6 274.867266)">Remote files &amp; tools</text>
+   </g>
+   <g id="text_8">
+    <text style="fill: #172b40; font: 700 18px 'Arial'; text-anchor: start" x="320.4" y="227.444062" transform="rotate(-0 320.4 227.444062)">Auth proxy</text>
+   </g>
+   <g id="text_9">
+    <text style="fill: #54677a; font: 12.5px 'Arial'" transform="translate(320.4 258.219609)">Cookie stays in memory</text>
+    <text style="fill: #54677a; font: 12.5px 'Arial'" transform="translate(320.4 275.166094)">HTTP + WebSocket</text>
+   </g>
+   <g id="text_10">
+    <text style="fill: #172b40; font: 700 18px 'Arial'; text-anchor: start" x="565.2" y="227.444063" transform="rotate(-0 565.2 227.444063)">SSH tunnel</text>
+   </g>
+   <g id="text_11">
+    <text style="fill: #54677a; font: 12.5px 'Arial'" transform="translate(565.2 258.227422)">Native OpenSSH</text>
+    <text style="fill: #54677a; font: 12.5px 'Arial'" transform="translate(565.2 275.027422)">Loopback listener</text>
+   </g>
+   <g id="text_12">
+    <text style="fill: #172b40; font: 700 18px 'Arial'; text-anchor: start" x="813.6" y="227.444063" transform="rotate(-0 813.6 227.444063)">Remote DSH</text>
+   </g>
+   <g id="text_13">
+    <text style="fill: #54677a; font: 12.5px 'Arial'" transform="translate(813.6 258.067266)">Runs in the remote workspace</text>
+    <text style="fill: #54677a; font: 12.5px 'Arial'" transform="translate(813.6 274.867266)">Node + dsh under ~/.local</text>
+   </g>
+   <g id="text_14">
+    <!-- 127.0.0.1:$Q$ -->
+    <g style="fill: #2463b7" transform="translate(121.56 352.08)">
+     <text>
+      <tspan style="font: 12px 'Arial'" x="0 6.673828 13.347656 20.021484 23.355469 30.029297 33.363281 40.037109 43.371094 50.044922" y="-0.375">127.0.0.1:</tspan>
+      <tspan style="font: italic 12px 'Times New Roman'" x="53.378906" y="-0.375">Q</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="text_15">
+    <text style="fill: #2463b7; font: 11.5px 'Arial'; text-anchor: middle" x="404.64" y="351.671484" transform="rotate(-0 404.64 351.671484)">Inject auth; rewrite origin</text>
+   </g>
+   <g id="text_16">
+    <!-- 127.0.0.1:$P$ -->
+    <g style="fill: #2463b7" transform="translate(614.04 352.029375)">
+     <text>
+      <tspan style="font: 12px 'Arial'" x="0 6.673828 13.347656 20.021484 23.355469 30.029297 33.363281 40.037109 43.371094 50.044922" y="-0.375">127.0.0.1:</tspan>
+      <tspan style="font: italic 12px 'Times New Roman'" x="53.378906" y="-0.375">P</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="text_17">
+    <!-- 127.0.0.1:$P$ -->
+    <g style="fill: #2463b7" transform="translate(914.28 352.029375)">
+     <text>
+      <tspan style="font: 12px 'Arial'" x="0 6.673828 13.347656 20.021484 23.355469 30.029297 33.363281 40.037109 43.371094 50.044922" y="-0.375">127.0.0.1:</tspan>
+      <tspan style="font: italic 12px 'Times New Roman'" x="53.378906" y="-0.375">P</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="text_18">
+    <text style="fill: #14776c; font: 700 13px 'Arial'; text-anchor: start" x="61.92" y="431.383594" transform="rotate(-0 61.92 431.383594)">Setup &amp; control</text>
+   </g>
+   <g id="text_19">
+    <text style="fill: #14776c; font: 13px 'Arial'; text-anchor: start" x="219.6" y="431.383594" transform="rotate(-0 219.6 431.383594)">Scripts over stdin  /  Review install plan  /  Back up config before writing</text>
+   </g>
+   <g id="text_20">
+    <!-- SSH forwards the same port $P$ on both ends. Proxy port $Q$ is separate. WSL uses Windows–Linux loopback instead of SSH forwarding. -->
+    <g style="fill: #54677a" transform="translate(43.2 499.289)">
+     <text>
+      <tspan style="font: 11.3px 'Arial'" x="0 7.503662 15.007324 23.131714 26.257324 29.382935 35.639648 39.385986 47.510376 53.76709 57.513428 63.770142 69.395142 72.520752 75.646362 81.903076 88.15979 91.2854 96.9104 103.167114 112.538452 118.795166 121.920776 128.17749 134.434204 138.180542 141.306152 151.303711 154.429321 160.686035 166.942749 170.068359 176.325073 182.581787 185.707397 191.964111 195.089722 201.346436 207.603149 213.859863 219.484863 222.610474 225.736084 233.239746 236.986084 243.242798 248.867798 254.492798 257.618408 263.875122 270.131836 273.878174 277.003784 288.253784 291.379395 293.878784 299.503784 302.629395 308.254395 314.511108 320.767822 327.024536 330.770874 337.027588 340.153198 346.409912 349.535522 352.661133 363.279419 370.783081 377.039795 380.165405 386.422119 392.047119 398.303833 403.928833 407.054443 417.672729 420.172119 426.428833 432.685547 438.942261 447.06665 452.69165 458.948364 465.205078 467.704468 473.961182 480.217896 485.842896 488.968506 491.467896 497.724609 503.981323 510.238037 516.494751 522.751465 528.376465 534.001465 537.127075 539.626465 545.883179 551.508179 554.633789 560.890503 567.147217 573.403931 576.529541 582.786255 585.911865 589.037476 596.541138 604.0448 612.169189 615.2948 618.42041 624.677124 628.423462 636.547852 642.804565 646.550903 652.807617 655.307007 661.563721 667.820435" y="-0.984375">SSH forwards the same port  on both ends. Proxy port  is separate. WSL uses Windows–Linux loopback instead of SSH forwarding.</tspan>
+      <tspan style="font: italic 11.3px 'Times New Roman'" x="144.431763 280.129395" y="-0.984375">PQ</tspan>
+     </text>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pc639aebd0e">
+   <rect x="0" y="0" width="1152" height="525.6"/>
+  </clipPath>
+ </defs>
+</svg>

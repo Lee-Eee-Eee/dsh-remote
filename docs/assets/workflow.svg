@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1152pt" height="489.6pt" viewBox="0 0 1152 489.6" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.9.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 489.6
+L 1152 489.6
+L 1152 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 53.28 316.8
+L 282.24 316.8
+Q 292.32 316.8 292.32 306.72
+L 292.32 132.48
+Q 292.32 122.4 282.24 122.4
+L 53.28 122.4
+Q 43.2 122.4 43.2 132.48
+L 43.2 306.72
+Q 43.2 316.8 53.28 316.8
+z
+" clip-path="url(#pfa6d31b04f)" style="fill: #f6f9fc; stroke: #cdd8e2; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 292.32 221.76
+Q 303.84 221.76 313.459342 221.76
+" clip-path="url(#pfa6d31b04f)" style="fill: none; stroke: #2463b7; stroke-width: 1.7; stroke-linecap: round"/>
+    <path d="M 307.459342 218.76
+L 313.459342 221.76
+L 307.459342 224.76
+z
+" clip-path="url(#pfa6d31b04f)" style="fill: #2463b7; stroke: #2463b7; stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 325.44 316.8
+L 554.4 316.8
+Q 564.48 316.8 564.48 306.72
+L 564.48 132.48
+Q 564.48 122.4 554.4 122.4
+L 325.44 122.4
+Q 315.36 122.4 315.36 132.48
+L 315.36 306.72
+Q 315.36 316.8 325.44 316.8
+z
+" clip-path="url(#pfa6d31b04f)" style="fill: #f6f9fc; stroke: #cdd8e2; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 564.48 221.76
+Q 576 221.76 585.619342 221.76
+" clip-path="url(#pfa6d31b04f)" style="fill: none; stroke: #2463b7; stroke-width: 1.7; stroke-linecap: round"/>
+    <path d="M 579.619342 218.76
+L 585.619342 221.76
+L 579.619342 224.76
+z
+" clip-path="url(#pfa6d31b04f)" style="fill: #2463b7; stroke: #2463b7; stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 597.6 316.8
+L 826.56 316.8
+Q 836.64 316.8 836.64 306.72
+L 836.64 132.48
+Q 836.64 122.4 826.56 122.4
+L 597.6 122.4
+Q 587.52 122.4 587.52 132.48
+L 587.52 306.72
+Q 587.52 316.8 597.6 316.8
+z
+" clip-path="url(#pfa6d31b04f)" style="fill: #f6f9fc; stroke: #cdd8e2; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 836.64 221.76
+Q 848.16 221.76 857.779342 221.76
+" clip-path="url(#pfa6d31b04f)" style="fill: none; stroke: #2463b7; stroke-width: 1.7; stroke-linecap: round"/>
+    <path d="M 851.779342 218.76
+L 857.779342 221.76
+L 851.779342 224.76
+z
+" clip-path="url(#pfa6d31b04f)" style="fill: #2463b7; stroke: #2463b7; stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 869.76 316.8
+L 1098.72 316.8
+Q 1108.8 316.8 1108.8 306.72
+L 1108.8 132.48
+Q 1108.8 122.4 1098.72 122.4
+L 869.76 122.4
+Q 859.68 122.4 859.68 132.48
+L 859.68 306.72
+Q 859.68 316.8 869.76 316.8
+z
+" clip-path="url(#pfa6d31b04f)" style="fill: #f6f9fc; stroke: #cdd8e2; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 53.28 440.64
+L 550.08 440.64
+Q 560.16 440.64 560.16 430.56
+L 560.16 381.6
+Q 560.16 371.52 550.08 371.52
+L 53.28 371.52
+Q 43.2 371.52 43.2 381.6
+L 43.2 430.56
+Q 43.2 440.64 53.28 440.64
+z
+" clip-path="url(#pfa6d31b04f)" style="fill: #edf5f3; stroke: #bcd9d1; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 587.52 440.64
+L 1098.72 440.64
+Q 1108.8 440.64 1108.8 430.56
+L 1108.8 381.6
+Q 1108.8 371.52 1098.72 371.52
+L 587.52 371.52
+Q 577.44 371.52 577.44 381.6
+L 577.44 430.56
+Q 577.44 440.64 587.52 440.64
+z
+" clip-path="url(#pfa6d31b04f)" style="fill: #f6f9fc; stroke: #cdd8e2; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="fill: #172b40; font: 700 27px 'Arial'; text-anchor: start" x="43.2" y="50.4" transform="rotate(-0 43.2 50.4)">From target to workspace.</text>
+   </g>
+   <g id="text_2">
+    <text style="fill: #54677a; font: 14px 'Arial'; text-anchor: start" x="43.2" y="80.64" transform="rotate(-0 43.2 80.64)">DSH Remote  /  Review each setup step, then connect</text>
+   </g>
+   <g id="text_3">
+    <text style="fill: #2463b7; font: 700 21px 'Times New Roman'; text-anchor: start" x="59.76" y="154.305937" transform="rotate(-0 59.76 154.305937)">01</text>
+   </g>
+   <g id="text_4">
+    <text style="fill: #172b40; font: 700 15.8px 'Arial'; text-anchor: start" x="59.76" y="193.661906" transform="rotate(-0 59.76 193.661906)">Choose a target</text>
+   </g>
+   <g id="text_5">
+    <text style="fill: #54677a; font: 12.6px 'Arial'" transform="translate(59.76 226.612406)">SSH config aliases</text>
+    <text style="fill: #54677a; font: 12.6px 'Arial'" transform="translate(59.76 243.694462)">WSL distributions</text>
+    <text style="fill: #54677a; font: 12.6px 'Arial'" transform="translate(59.76 260.887162)">Or add a host manually</text>
+   </g>
+   <g id="text_6">
+    <text style="fill: #2463b7; font: 700 21px 'Times New Roman'; text-anchor: start" x="331.92" y="154.305937" transform="rotate(-0 331.92 154.305937)">02</text>
+   </g>
+   <g id="text_7">
+    <text style="fill: #172b40; font: 700 15.8px 'Arial'; text-anchor: start" x="331.92" y="193.469344" transform="rotate(-0 331.92 193.469344)">Check the environment</text>
+   </g>
+   <g id="text_8">
+    <text style="fill: #54677a; font: 12.6px 'Arial'" transform="translate(331.92 226.458844)">Probe Node + dsh</text>
+    <text style="fill: #54677a; font: 12.6px 'Arial'" transform="translate(331.92 243.393244)">Review missing components</text>
+    <text style="fill: #54677a; font: 12.6px 'Arial'" transform="translate(331.92 260.4753)">Install without sudo</text>
+   </g>
+   <g id="text_9">
+    <text style="fill: #2463b7; font: 700 21px 'Times New Roman'; text-anchor: start" x="604.08" y="154.305937" transform="rotate(-0 604.08 154.305937)">03</text>
+   </g>
+   <g id="text_10">
+    <text style="fill: #172b40; font: 700 15.8px 'Arial'; text-anchor: start" x="604.08" y="193.661906" transform="rotate(-0 604.08 193.661906)">Port model config</text>
+   </g>
+   <g id="text_11">
+    <text style="fill: #54677a; font: 12.6px 'Arial'" transform="translate(604.08 226.612406)">Select providers &amp; key refs</text>
+    <text style="fill: #54677a; font: 12.6px 'Arial'" transform="translate(604.08 243.694462)">Preview names and counts</text>
+    <text style="fill: #54677a; font: 12.6px 'Arial'" transform="translate(604.08 260.874563)">Back up remote files</text>
+   </g>
+   <g id="text_12">
+    <text style="fill: #2463b7; font: 700 21px 'Times New Roman'; text-anchor: start" x="876.24" y="154.305937" transform="rotate(-0 876.24 154.305937)">04</text>
+   </g>
+   <g id="text_13">
+    <text style="fill: #172b40; font: 700 15.8px 'Arial'; text-anchor: start" x="876.24" y="193.469344" transform="rotate(-0 876.24 193.469344)">Connect &amp; work</text>
+   </g>
+   <g id="text_14">
+    <text style="fill: #54677a; font: 12.6px 'Arial'" transform="translate(876.24 226.458844)">Full remote DSH interface</text>
+    <text style="fill: #54677a; font: 12.6px 'Arial'" transform="translate(876.24 243.393244)">HTTP + WebSocket UI</text>
+    <text style="fill: #54677a; font: 12.6px 'Arial'" transform="translate(876.24 260.327644)">Reload, restart or stop</text>
+   </g>
+   <g id="text_15">
+    <text style="fill: #54677a; font: 12.5px 'Arial'; text-anchor: start" x="43.2" y="347.499609" transform="rotate(-0 43.2 347.499609)">Already installed or configured? Continue with the steps you need.</text>
+   </g>
+   <g id="text_16">
+    <text style="fill: #14776c; font: 700 14px 'Arial'; text-anchor: start" x="61.92" y="399.711562" transform="rotate(-0 61.92 399.711562)">Close the panel → reconnect later</text>
+   </g>
+   <g id="text_17">
+    <text style="fill: #14776c; font: 11.7px 'Arial'; text-anchor: start" x="61.92" y="424.534641" transform="rotate(-0 61.92 424.534641)">The remote process keeps running when the local connection closes.</text>
+   </g>
+   <g id="text_18">
+    <text style="fill: #172b40; font: 700 14px 'Arial'; text-anchor: start" x="596.16" y="399.711562" transform="rotate(-0 596.16 399.711562)">Stop remote → end the remote process</text>
+   </g>
+   <g id="text_19">
+    <text style="fill: #54677a; font: 11.7px 'Arial'; text-anchor: start" x="596.16" y="424.534641" transform="rotate(-0 596.16 424.534641)">Use the toolbar when you want to shut the workspace down.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pfa6d31b04f">
+   <rect x="0" y="0" width="1152" height="489.6"/>
+  </clipPath>
+ </defs>
+</svg>
