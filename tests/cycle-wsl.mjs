@@ -1,43 +1,37 @@
-/** Reproduce the stop → start cycle on WSL and dump the remote log. */
+/**
+ * Exercise stop → start on real WSL without hiding failures or leaving the
+ * second server behind. Only this test's target and registry are cleaned up.
+ */
+import assert from 'node:assert/strict'
+import { mkdtempSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'
-import { TargetManager } from '../lib/manager.js'
-import { WslChannel } from '../lib/channel.js'
+import { TargetManager, httpStatus, redactToken } from '../lib/manager.js'
 
 const distro = process.env.DISTRO ?? 'Debian'
-const manager = new TargetManager({ file: join(tmpdir(), `dsh-remote-cycle-${Date.now()}.json`) })
+const homeDir = mkdtempSync(join(tmpdir(), 'dsh-remote-cycle-'))
+const manager = new TargetManager({ file: join(homeDir, 'registry.json') })
 const created = manager.create({ kind: 'wsl', label: `WSL ${distro}`, wsl: { distro } })
-const channel = new WslChannel({ wsl: { distro } })
-const log = (...parts) => console.log(...parts)
 
 try {
-  log('--- first start ---')
-  const first = await manager.start(created.id)
-  log('state:', first.state, 'url:', first.url)
-
-  log('--- stop ---')
-  await manager.stop(created.id)
-  log('stopped')
-
-  log('--- second start ---')
-  const second = await manager.start(created.id)
-  log('state:', second.state, 'url:', second.url)
+  for (const round of [1, 2]) {
+    const started = await manager.start(created.id)
+    assert.equal(started.state, 'running')
+    const url = new URL(started.url)
+    assert.equal(url.search, '', 'the iframe URL must not contain a token')
+    assert.equal(await httpStatus(Number(url.port), '/'), 200)
+    console.log(`round ${round}: running; anonymous iframe -> 200`)
+    const stopped = await manager.stop(created.id)
+    assert.equal(stopped.state, 'idle')
+    assert.equal(await httpStatus(Number(url.port), '/'), 0, 'stop releases the proxy')
+    console.log(`round ${round}: stopped; proxy released`)
+  }
+  console.log('\ncycle-wsl: all assertions passed')
 } catch (error) {
-  log('FAILED:', error instanceof Error ? error.message : error)
-  log('--- remote state ---')
-  const session = `dsh-remote-${created.id.slice(0, 16)}`
-  const info = await channel.exec([
-    `ls -l "$HOME/.dsh-remote" 2>&1`,
-    `echo "--- log ---"`,
-    `tail -n 40 "$HOME/.dsh-remote/${created.id}.log" 2>&1`,
-    `echo "--- ps ---"`,
-    `ps -eo pid,args | grep -v grep | grep 'dsh web' || echo none`,
-    `echo "--- pidfile ---"`,
-    `cat "$HOME/.dsh-remote/${session}.pid" 2>&1 || echo none`,
-  ].join('\n'), { timeoutMs: 20000 })
-  log(info.stdout)
-  log('stderr:', info.stderr)
+  console.error('cycle-wsl FAILED:', redactToken(error instanceof Error ? error.message : String(error)))
+  process.exitCode = 1
 } finally {
+  await manager.stop(created.id).catch(() => { process.exitCode = 1 })
   manager.dispose()
-  process.exit(0)
+  rmSync(homeDir, { recursive: true, force: true })
 }
