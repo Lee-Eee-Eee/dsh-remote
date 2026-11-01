@@ -1,7 +1,9 @@
 # Changelog
 
-## Unreleased
+## 0.1.3 — 2026-11-01
 
+- Exclude `client-connection/browser-session` and its payload even when account credentials are selected. Filter at preview and write boundaries, skip unrecognized account structures, and preserve independent API-key porting.
+- Add regression coverage for account selection, quoted and escaped keys, CRLF, empty exports and the actual remote write payload.
 - Rewrite the Chinese and English READMEs around features, installation and first use. Move implementation details into a bilingual technical reference and development instructions into `CONTRIBUTING.md`.
 - Clarify that the API-key configuration group copies secret values to the remote target; only the preview hides values.
 

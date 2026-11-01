@@ -34,7 +34,7 @@
 需要 DSH `0.2.1-rc.2` 或更新版本。在插件管理器中添加以下来源：
 
 ```text
-github:Lee-Eee-Eee/dsh-remote#v0.1.2
+github:Lee-Eee-Eee/dsh-remote#v0.1.3
 ```
 
 安装后重启 DSH 并刷新页面，侧栏会出现 **远程**。
@@ -45,7 +45,7 @@ github:Lee-Eee-Eee/dsh-remote#v0.1.2
 如果终端已能运行 `dsh`，可执行：
 
 ```sh
-dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote#v0.1.2"
+dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote#v0.1.3"
 ```
 
 将 `desktop` 替换成宿主实际使用的 profile；网页版通常使用 `web`。安装到其他 profile 的插件不会出现在当前宿主中。
@@ -59,7 +59,7 @@ dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote#v0.1.2"
 3. **准备模型**：远程尚未配置模型时，打开「移植本地配置」，选择所需的服务商、默认模型和 API 密钥组，点击「写入并重启」。API 密钥组会复制实际密钥值，请使用你信任的目标。远程已有可用模型时可跳过这步。
 4. **连接**：点击「连接」，在主区打开远程 DSH，选择远程项目开始工作。
 
-配置移植的预览只显示名称和数量。远程会话与项目由嵌入的 DSH 界面管理。
+配置移植的预览只显示名称和数量，并排除本机浏览器会话凭据。远程会话与项目由嵌入的 DSH 界面管理。
 
 ### 连接后
 

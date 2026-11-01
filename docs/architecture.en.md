@@ -91,11 +91,13 @@ Selection is by group:
 | Model providers | Replace the remote `llm-pi-ai` block with the local block, including providers, endpoints and model lists | On when present locally |
 | Default model | Replace the remote `agent-default-model` block | On when present locally |
 | API keys | Merge all local `refs` into the remote credential file, including actual key values | On when present locally |
-| DeepSeek account credentials | Write local `records` account data | Off |
+| DeepSeek account credentials | Write filtered local `records` account data | Off |
 
 Previews show names, key names and counts, with secret values hidden. Selecting API keys transfers their values to the chosen target. Account credentials also contain login tokens; port them only to trusted targets.
 
-API-key porting handles only `refs`. The account option copies the entire `records` block; leave it off if that block contains a local browser session.
+API-key porting handles only `refs`. Account porting excludes `client-connection/browser-session` and its entire payload while retaining other local account records. Filtering runs both during preview and before writing. When only a browser session remains, the account group is unavailable and remote `records` are left untouched.
+
+The filter supports DSH's block mappings with plain, single-quoted and JSON-compatible double-quoted keys. Unrecognized keys, flow record mappings, YAML aliases, anchors or tags cause the account group to be skipped; API keys remain independently portable.
 
 Existing files are backed up to `*.bak-<timestamp>` before writing. Writes use `umask 077` and set file permissions to 0600. The patch editor handles a fresh profile's `[]` placeholder and preserves unrelated blocks.
 

@@ -14,7 +14,7 @@ import {
   summarizeProviders,
   upsertSequenceEntry,
 } from '../lib/yaml-blocks.js'
-import { buildRemoteCredentials, buildRemotePatch, readLocalConfig } from '../lib/config-sync.js'
+import { applyConfigSync, buildRemoteCredentials, buildRemotePatch, readLocalConfig } from '../lib/config-sync.js'
 
 const REMOTE_PATCH = `- id: ui-theme
   name: "@deepseek-ai/dsh-client-ui-theme"
@@ -164,4 +164,187 @@ assert.doesNotMatch(creds, /must-not-be-ported/, 'the browser-session record is 
 assert.doesNotMatch(creds, /^ {2}secret:/m, 'no browser-session record is ported')
 
 rmSync(fixture, { recursive: true, force: true })
+
+// --- explicitly selecting account credentials must not port local sessions --
+const accountFixture = mkdtempSync(join(tmpdir(), 'dsh-remote-account-fixture-'))
+const accountCredentialsFile = join(accountFixture, '.credentials.yaml')
+const remoteWithSession = `version: 1
+records:
+  client-connection/browser-session:
+    kind: browser-session
+    payload:
+      secret: remote-session-stays-local-to-remote
+refs:
+  REMOTE_KEY: "remote-key-value"
+metadata:
+  owner: remote-metadata-kept
+`
+const browserSecret = 'synthetic-local-browser-secret-never-copy'
+const localRecords = (browserKey) => `version: 1
+records:
+  deepseek/account-before:
+    kind: account
+    payload:
+      token: synthetic-account-before
+      label: "*literal-star-inside-quotes"
+      note: |
+        client-connection/browser-session: text-inside-an-account
+        *literal-star-inside-block
+  ${browserKey}:
+    kind: browser-session
+    payload:
+      secret: |
+        ${browserSecret}
+        synthetic-browser-continuation-never-copy
+      nested:
+        value: synthetic-browser-nested-never-copy
+  deepseek/account-after:
+    kind: account
+    payload:
+      token: synthetic-account-after
+refs:
+  LOCAL_KEY: "local-key-value"
+`
+const browserKeys = [
+  'client-connection/browser-session',
+  "'client-connection/browser-session'",
+  '"client-connection/browser-session"',
+  String.raw`"client-connection\/browser-session"`,
+  String.raw`"\u0063lient-connection/browser-session"`,
+]
+
+try {
+  for (const browserKey of browserKeys) {
+    for (const newline of ['\n', '\r\n']) {
+      writeFileSync(accountCredentialsFile, localRecords(browserKey).replaceAll('\n', newline))
+      const accountLocal = readLocalConfig({ dshHome: accountFixture, profile: 'desktop' })
+      const accountItem = accountLocal.items.find(item => item.id === 'account')
+      assert.equal(accountItem.present, true, 'ordinary account credentials remain available')
+      assert.equal(accountItem.defaultOn, false, 'account credentials stay opt-in')
+      const accountResult = buildRemoteCredentials(remoteWithSession, accountLocal, new Set(['account', 'api-keys']))
+      assert.equal(typeof accountResult, 'string')
+      assert.doesNotMatch(accountResult, new RegExp(browserSecret), 'account porting must omit the local browser-session secret')
+      assert.doesNotMatch(accountResult, /synthetic-browser-(continuation|nested)-never-copy/, 'the entire browser-session payload is excluded')
+      assert.match(accountResult, /synthetic-account-before/, 'the account preceding the browser session survives')
+      assert.match(accountResult, /synthetic-account-after/, 'the account following the browser session survives')
+      assert.match(accountResult, /text-inside-an-account/, 'browser-session text inside another account is not a record key')
+      assert.match(accountResult, /\*literal-star-inside-quotes/, 'quoted literal stars are ordinary account data')
+      assert.match(accountResult, /\*literal-star-inside-block/, 'block scalar content is not treated as an alias')
+      assert.equal(readCredentialRefs(accountResult).get('LOCAL_KEY'), 'local-key-value', 'API-key porting still works alongside accounts')
+      assert.equal(readCredentialRefs(accountResult).get('REMOTE_KEY'), 'remote-key-value', 'existing remote refs survive')
+      assert.match(accountResult, /remote-metadata-kept/, 'unrelated remote top-level data survives')
+      assert.doesNotMatch(JSON.stringify(accountLocal.items), /synthetic-account-before|synthetic-account-after|synthetic-local-browser-secret/, 'the preview remains free of credential values')
+    }
+  }
+
+  const duplicateBrowserRecords = localRecords('client-connection/browser-session').replace('  deepseek/account-after:', `  "client-connection\\/browser-session":
+    kind: browser-session
+    payload:
+      secret: synthetic-duplicate-browser-never-copy
+  deepseek/account-after:`)
+  writeFileSync(accountCredentialsFile, duplicateBrowserRecords)
+  const duplicateLocal = readLocalConfig({ dshHome: accountFixture, profile: 'desktop' })
+  const duplicateResult = buildRemoteCredentials(remoteWithSession, duplicateLocal, new Set(['account']))
+  assert.doesNotMatch(duplicateResult, /synthetic-(?:local-browser-secret|duplicate-browser)-never-copy/, 'all occurrences of the local browser-session key are excluded')
+  assert.match(duplicateResult, /synthetic-account-before/)
+  assert.match(duplicateResult, /synthetic-account-after/)
+
+  // Check the actual write payload as well as the pure document builder.
+  writeFileSync(accountCredentialsFile, localRecords('client-connection/browser-session'))
+  const writableLocal = readLocalConfig({ dshHome: accountFixture, profile: 'desktop' })
+
+  // A caller holding an unfiltered block must not bypass the write boundary.
+  for (const browserKey of browserKeys) {
+    const rawRecords = localRecords(browserKey).replace(/^version: 1\n/, '').split('\nrefs:')[0]
+    const rawLocal = { ...writableLocal, blocks: { ...writableLocal.blocks, records: rawRecords } }
+    const rawResult = buildRemoteCredentials(remoteWithSession, rawLocal, new Set(['account']))
+    assert.equal(typeof rawResult, 'string', 'ordinary accounts remain portable through the direct builder')
+    assert.doesNotMatch(rawResult, new RegExp(browserSecret), 'an unfiltered host-side block cannot bypass session exclusion')
+    assert.match(rawResult, /synthetic-account-before/)
+    assert.match(rawResult, /synthetic-account-after/)
+  }
+
+  const writes = []
+  const channel = {
+    async exec(script) {
+      if (script.startsWith('cat ')) {
+        return { code: 0, stdout: script.includes('.credentials.yaml') ? remoteWithSession : '', stderr: '' }
+      }
+      const encoded = /printf '%s' '([A-Za-z0-9+/=]+)' \| base64 -d/.exec(script)
+      assert.ok(encoded, 'configuration writes carry a decodable payload')
+      writes.push(Buffer.from(encoded[1], 'base64').toString('utf8'))
+      return { code: 0, stdout: 'WROTE=/synthetic/credentials.bak-test\n', stderr: '' }
+    },
+  }
+  const applied = await applyConfigSync({ channel, local: writableLocal, selected: new Set(['account', 'api-keys']) })
+  assert.equal(applied.ok, true)
+  assert.equal(writes.length, 1, 'only the credentials file needs writing')
+  assert.doesNotMatch(writes[0], new RegExp(browserSecret), 'the remote write never contains the local session secret')
+  assert.match(writes[0], /synthetic-account-before/)
+  assert.match(writes[0], /synthetic-account-after/)
+
+  // With no transferable accounts, selecting account must not erase the
+  // remote's own session or other records. Refs remain independently portable.
+  for (const browserKey of browserKeys) {
+    const onlyBrowserBlock = `records:
+  ${browserKey}:
+    kind: browser-session
+    payload:
+      secret: ${browserSecret}
+`
+    writeFileSync(accountCredentialsFile, `version: 1
+${onlyBrowserBlock}refs:
+  LOCAL_KEY: "local-key-value"
+`)
+    const sessionOnly = readLocalConfig({ dshHome: accountFixture, profile: 'desktop' })
+    const accountItem = sessionOnly.items.find(item => item.id === 'account')
+    assert.equal(accountItem.present, false, 'a browser session is not a transferable account')
+    assert.equal(accountItem.defaultOn, false)
+    assert.equal(buildRemoteCredentials(remoteWithSession, sessionOnly, new Set(['account'])), undefined, 'account-only selection leaves remote records untouched when filtering removes every local account')
+    const rawSessionOnly = { ...sessionOnly, blocks: { ...sessionOnly.blocks, records: onlyBrowserBlock } }
+    assert.equal(buildRemoteCredentials(remoteWithSession, rawSessionOnly, new Set(['account'])), undefined, 'a raw browser-only block cannot trigger a remote records overwrite')
+    const refsOnlyResult = buildRemoteCredentials(remoteWithSession, sessionOnly, new Set(['account', 'api-keys']))
+    assert.match(refsOnlyResult, /remote-session-stays-local-to-remote/, 'the remote session survives an API-key merge')
+    assert.match(refsOnlyResult, /remote-metadata-kept/)
+    assert.equal(readCredentialRefs(refsOnlyResult).get('LOCAL_KEY'), 'local-key-value')
+    assert.doesNotMatch(refsOnlyResult, new RegExp(browserSecret))
+  }
+
+  // The narrow editor must skip an account block it cannot identify safely,
+  // including YAML-only key escapes and non-block mapping/alias structures.
+  const unsupportedAccountBlocks = [
+    'records:',
+    'records: {}',
+    localRecords(String.raw`"\x63lient-connection/browser-session"`).replace(/^version: 1\n/, '').split('\nrefs:')[0],
+    'records: {"deepseek/account": {"token": "synthetic-flow-account"}, "client-connection/browser-session": {"secret": "synthetic-flow-browser"}}',
+    `records:
+  deepseek/account: {token: synthetic-flow-account}
+  client-connection/browser-session:
+    payload:
+      secret: ${browserSecret}
+`,
+    `records:
+  <<: *shared-records
+  deepseek/account:
+    payload:
+      token: synthetic-merge-account
+`,
+    `records:
+  deepseek/account: *shared-account
+`,
+  ]
+  for (const records of unsupportedAccountBlocks) {
+    writeFileSync(accountCredentialsFile, `version: 1\n${records}\nrefs:\n  LOCAL_KEY: "local-key-value"\n`)
+    const unsupportedLocal = readLocalConfig({ dshHome: accountFixture, profile: 'desktop' })
+    assert.equal(unsupportedLocal.items.find(item => item.id === 'account').present, false, 'unsupported account structures are unavailable for porting')
+    const rawUnsupported = { ...unsupportedLocal, blocks: { ...unsupportedLocal.blocks, records } }
+    assert.equal(buildRemoteCredentials(remoteWithSession, rawUnsupported, new Set(['account'])), undefined, 'unsupported account blocks fail closed at the write boundary')
+    const refsResult = buildRemoteCredentials(remoteWithSession, rawUnsupported, new Set(['account', 'api-keys']))
+    assert.match(refsResult, /remote-session-stays-local-to-remote/, 'skipping unsupported accounts keeps remote records')
+    assert.equal(readCredentialRefs(refsResult).get('LOCAL_KEY'), 'local-key-value', 'unsupported account syntax does not block independent refs')
+  }
+} finally {
+  rmSync(accountFixture, { recursive: true, force: true })
+}
+
 console.log('yaml-blocks: all assertions passed')

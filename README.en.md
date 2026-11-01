@@ -34,7 +34,7 @@
 Requires DSH `0.2.1-rc.2` or newer. Add this source in the plugin manager:
 
 ```text
-github:Lee-Eee-Eee/dsh-remote#v0.1.2
+github:Lee-Eee-Eee/dsh-remote#v0.1.3
 ```
 
 Restart DSH and refresh the page. **Remote** appears in the sidebar.
@@ -45,7 +45,7 @@ Restart DSH and refresh the page. **Remote** appears in the sidebar.
 If `dsh` is available in your terminal, run:
 
 ```sh
-dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote#v0.1.2"
+dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote#v0.1.3"
 ```
 
 Replace `desktop` with the profile your host actually uses; web hosts typically use `web`. Installing into another profile will not add the plugin to the current host.
@@ -59,7 +59,7 @@ Replace `desktop` with the profile your host actually uses; web hosts typically 
 3. **Configure a model.** If the remote has no model configuration, open **Port local config**, select the provider, default-model and API-key groups you need, then click **Write and restart**. The API-key group copies actual secret values, so use a target you trust. Skip this step when the remote already has a working model.
 4. **Connect.** Click **Connect**, then choose a remote project in the embedded DSH interface and start working.
 
-Configuration previews show names and counts only. Remote conversations and projects are managed inside the embedded DSH interface.
+Configuration previews show names and counts only, and local browser-session credentials are excluded from porting. Remote conversations and projects are managed inside the embedded DSH interface.
 
 ### Once connected
 
