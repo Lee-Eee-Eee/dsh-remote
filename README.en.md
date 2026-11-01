@@ -1,158 +1,101 @@
-# dsh-remote · Remote Workspace
+<p align="center">
+  <img src="icon.svg" width="72" height="72" alt="dsh-remote">
+</p>
 
-**Keep the interface local. Run the work remotely.**
+<h1 align="center">dsh-remote</h1>
 
-Connect an SSH server or WSL distribution to [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). Pick a target in the sidebar and use its full DSH interface in your local window. Conversations, commands and file operations run on the remote instance.
+<p align="center">SSH and WSL remote workspaces inside DeepSeek Harness</p>
 
-[中文](README.md) · [Install](#install) · [Workflow](#workflow) · [Architecture](#architecture) · [Report an issue](https://github.com/Lee-Eee-Eee/dsh-remote/issues)
+<p align="center">
+  <a href="https://github.com/Lee-Eee-Eee/dsh-remote/releases"><img src="https://img.shields.io/github/v/release/Lee-Eee-Eee/dsh-remote?label=release&amp;color=2563eb" alt="Release"></a>
+  <a href="https://github.com/Lee-Eee-Eee/dsh-remote/actions/workflows/ci.yml"><img src="https://github.com/Lee-Eee-Eee/dsh-remote/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-64748b" alt="MIT license"></a>
+</p>
 
-[![CI](https://github.com/Lee-Eee-Eee/dsh-remote/actions/workflows/ci.yml/badge.svg)](https://github.com/Lee-Eee-Eee/dsh-remote/actions/workflows/ci.yml)
-![DSH](https://img.shields.io/badge/DSH-%3E%3D0.2.1--rc.2-2463b7)
-![Node](https://img.shields.io/badge/Node-%5E22.19%20%7C%7C%20%3E%3D24-14776c)
-[![MIT](https://img.shields.io/badge/license-MIT-54677a)](LICENSE)
+<p align="center">
+  <a href="README.md">简体中文</a> / English · <a href="#install">Install</a> · <a href="#first-connection">Usage</a> · <a href="#documentation-and-feedback">Docs</a>
+</p>
 
-![A remote DSH workspace embedded in the local desktop, with SSH and WSL targets and connection controls](docs/assets/remote-workspace.png)
+`dsh-remote` adds a **Remote** entry to [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). Connect a Linux server over SSH or a WSL distribution and open its full DSH interface in your local window. File operations and commands run in the target environment.
 
-*Real desktop screenshot. Private host and conversation details were masked by the screenshot provider.*
+![Remote workspace with SSH and WSL targets on the left and the remote DSH interface on the right](docs/assets/remote-workspace.png)
 
-## What it handles
+*Desktop screenshot.*
 
-| Your workflow | What dsh-remote provides |
-|---|---|
-| Work on a Linux server | Discover SSH aliases and reuse local keys, ssh-agent and jump-host settings |
-| Open a WSL project | Discover distributions alongside SSH targets |
-| Prepare a new environment | Review the installation plan, then install Node and dsh under the remote user's home without sudo |
-| Use your existing models | Select providers, default model and key references to port; back up remote files before writing |
-| Stay in one window | Embedded remote UI with reload, fullscreen, restart and stop controls |
-| Return after disconnecting | Recover a running remote instance; retry dropped SSH tunnels automatically |
+## Features
 
-Plain ESM. **No build step. No runtime npm dependencies.**
+- **SSH and WSL targets.** Discover hosts from your SSH configuration and local WSL distributions, or add targets manually. SSH connections reuse local keys, ssh-agent and jump-host settings.
+- **Remote setup.** Probe Node and DSH, review the installation plan, then install the selected components under the remote user's home without sudo.
+- **Model configuration.** Copy local providers, the default model and API keys to the remote environment, with backups before writing.
+- **Connection controls.** Reload, go fullscreen, restart or stop remote DSH from the panel. Reconnect to an existing instance, with automatic retries for dropped SSH tunnels.
 
 ## Install
 
-Add this GitHub source in DSH's plugin manager:
+Requires DSH `0.2.1-rc.2` or newer. Add this source in the plugin manager:
 
 ```text
 github:Lee-Eee-Eee/dsh-remote#v0.1.2
 ```
 
-Or use the CLI with the profile your host actually runs. This example uses `desktop`; replace it with `web` for a web host:
+Restart DSH and refresh the page. **Remote** appears in the sidebar.
 
-```powershell
+<details>
+<summary>Install from the command line</summary>
+
+If `dsh` is available in your terminal, run:
+
+```sh
 dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote#v0.1.2"
 ```
 
-Restart DSH and refresh the page. **Remote** appears in the sidebar. This plugin is available from GitHub; it has not been published to npm.
-
-<details>
-<summary>Install from a local checkout / develop</summary>
-
-```powershell
-git clone https://github.com/Lee-Eee-Eee/dsh-remote.git
-Set-Location dsh-remote
-dsh plugin --profile desktop add "$($PWD.Path)"
-```
-
-The checkout itself is the bundle; the plugin manager can also install that directory. Restart DSH after host-side edits, and refresh the page after edits to `client.js`.
+Replace `desktop` with the profile your host actually uses; web hosts typically use `web`. Installing into another profile will not add the plugin to the current host.
 
 </details>
 
-**Requirements:** local DSH ≥ `0.2.1-rc.2`, Node `^22.19.0 || >=24`; Linux x86_64 / arm64 targets with `bash`, `tar`, and `curl` or `wget`. SSH targets need key or agent authentication. WSL needs Windows–Linux loopback reachability.
+## First connection
 
-## Workflow
+1. **Add a target.** Open **Remote** and click **+** beside an SSH host or WSL distribution. Use **Add target** to enter an SSH alias or host details manually.
+2. **Probe the environment.** Select the target and click **Probe**. If Node or DSH is missing, open **Review install plan**, choose the steps and start installation.
+3. **Configure a model.** If the remote has no model configuration, open **Port local config**, select the provider, default-model and API-key groups you need, then click **Write and restart**. The API-key group copies actual secret values, so use a target you trust. Skip this step when the remote already has a working model.
+4. **Connect.** Click **Connect**, then choose a remote project in the embedded DSH interface and start working.
 
-![Choose a target, check its environment, port model configuration, then connect](docs/assets/workflow.png)
+Configuration previews show names and counts only. Remote conversations and projects are managed inside the embedded DSH interface.
 
-1. Open **Remote**. The panel discovers `~/.ssh/config` aliases, including `Include` files, and WSL distributions. Wildcard host patterns are skipped.
-2. Add a discovered target with **+**, or enter a host manually.
-3. **Probe** shows OS, architecture, Node, dsh, tmux, disk space and the SSH host fingerprint. Results are cached for ten minutes.
-4. If something is missing, **Review install plan** shows commands, destinations, download sources and estimated sizes. Confirm the steps to install; logs stream into the panel.
-5. **Port local config** lets you select model configuration to copy to the remote profile.
-6. **Connect** opens the full remote DSH interface. Use the toolbar to reload, open in a browser, copy its local address, go fullscreen or restart.
-7. **Stop remote** ends the remote process. Closing the panel or restarting local DSH leaves it available for reconnection. Use existing installations and configuration directly when they are already ready.
+### Once connected
 
-## Architecture
-
-![SSH data path: iframe to auth proxy Q to local SSH port P to remote DSH port P; WSL uses loopback](docs/assets/architecture.png)
-
-The proxy has its own port `Q`. The SSH tunnel uses the same port `P` on both ends so the remote request authority matches the authority bound into the DSH authentication cookie. WSL uses its existing loopback path instead of an SSH tunnel.
-
-- **Native OpenSSH.** Probe, launch and forwarding use the local `ssh` executable, preserving config aliases, keys, ssh-agent, ProxyJump and ProxyCommand.
-- **Scripts over stdin.** `ssh host bash` and `wsl.exe … -- bash` receive scripts on stdin. Passing scripts through `bash -c` would expose quotes and `$(...)` to Windows command-line re-parsing.
-- **Host-owned authentication.** The desktop's custom `app` origin makes an HTTP iframe cross-site; a `SameSite=Strict` remote cookie would be blocked. The host performs the token handshake, holds the cookie in memory and injects it upstream. The iframe URL contains no token, and upstream `Set-Cookie` headers stay out of browser responses.
-- **API and WebSocket forwarding.** The proxy rewrites Host, Origin and Referer to the upstream authority and sets Sec-Fetch-Site to same-origin so the remote request fence accepts embedded traffic.
-- **End-to-end startup check.** An anonymous GET `/` through the proxy must return 200 before the state becomes running. The live embed test also verifies the real UI, WebSocket 101 with cross-site markers, data received, and API POST passing the fence.
-- **Lifecycle management.** tmux is optional. A fallback runner writes its own PID before `exec` so it tracks dsh rather than a short-lived setsid parent. Launch reaps the previous instance using that target's old log port. Reconnection can reuse a still-running instance.
-- **SSH host keys.** `accept-new` records a first connection and rejects changed keys. Verify a changed fingerprint with the host administrator before removing the old known-host record.
-
-## Configuration porting
-
-The selection reads the current local profile and writes to the remote web profile:
-
-| Item | Handling |
+| Action | Effect |
 |---|---|
-| `llm-pi-ai` providers | Replace selected provider blocks, including model lists and base URLs |
-| `agent-default-model` | Copy the default model block |
-| Credential `refs` | Merge selected API-key references into remote `.credentials.yaml` |
-| DeepSeek account credentials | Optional, off by default; enable only for a trusted target |
+| Reload | Refresh the remote interface |
+| Restart | Restart DSH on the target |
+| Stop remote | End the target instance and close the local connection |
+| Close the panel / exit local DSH | Leave the remote process running for reconnection |
 
-Previews show names and counts. Secret values are never returned in the preview; token-bearing errors are redacted. Browser-session records are excluded. Each remote file is backed up to `*.bak-<timestamp>` before writing. The patch editor handles a fresh profile's `[]` placeholder and preserves unrelated blocks.
+## Requirements
 
-## Files and lifecycle
-
-| Location | Content |
+| Environment | Requirement |
 |---|---|
-| Local `~/.dsh/dsh-remote.json` | Saved targets, written with mode 0600; runtime token, ports and tunnels stay in memory |
-| Remote `~/.dsh-remote/<id>.log` | Per-target dsh output |
-| Remote `~/.local/node-<version>` and `~/.local/bin/dsh` | User-local Node and dsh installations |
-| Remote `~/.dsh/profiles/web/cordis.patch.yml` | Ported provider and default-model blocks |
-| Remote `~/.dsh/.credentials.yaml` | Merged credential references, mode 0600 |
+| Host runtime | Node `22.x` (≥ `22.19.0`), or `24` and newer |
+| SSH target | Linux x86_64 / arm64 with non-interactive key or agent authentication |
+| Automatic setup | `bash`, `tar`, and either `curl` or `wget` |
+| WSL | Windows–Linux loopback reachability: mirrored networking, or NAT with localhost forwarding enabled |
 
-After 30 minutes without panel access, idle cleanup releases the local connection while leaving remote dsh running. Explicit **Stop remote** shuts it down.
+## Common questions
 
-## Limitations and troubleshooting
+**No Remote entry after installation?** Check that you installed into the current host's profile, then restart DSH and refresh the page.
 
-- Remote conversations and projects stay inside the embedded remote interface. Projecting them into local session rows requires a separate ACP integration.
-- SSH password prompts and interactive first-connection fingerprint approval are unsupported. Confirm key/agent login from your terminal first.
-- WSL needs mirrored networking or NAT with `localhostForwarding=true`. If you change `.wslconfig`, apply it with `wsl --shutdown` when your WSL work is saved.
+**SSH connection fails?** Verify that `ssh <alias>` works without an interactive prompt and that the server permits SSH port forwarding. Password prompts are unsupported.
 
-| Symptom | Check |
-|---|---|
-| SSH authentication fails | Verify `ssh <alias>` works without a password prompt |
-| Host-key verification fails | Verify the new fingerprint before using `ssh-keygen -R <host>` and reconnecting |
-| Tunnel does not start | Check SSH forwarding is permitted by the server |
-| Blank remote UI | Reload, then inspect the target's `~/.dsh-remote/<id>.log` |
-| UI opens but model calls fail | Port provider configuration and key references, then restart remote dsh |
-| Embedded page shows an authentication error | Restart local DSH to ensure the host proxy code is loaded |
+**The interface opens but the model does not work?** Check the remote model configuration. After applying **Port local config**, restart remote DSH.
 
-## Tests
+For WSL networking, host-key and embedded authentication issues, see [troubleshooting](docs/architecture.en.md#troubleshooting).
 
-```powershell
-npm test                     # YAML editing, routes, loopback fence, CRUD, redaction
-node tests/embed-auth.mjs     # real anonymous UI, cross-site WebSocket 101, API POST
-node tests/http-live.mjs      # probe → config → start → anonymous iframe 200 → stop
-node tests/e2e-wsl.mjs        # probe + install plan on Debian WSL
-node tests/cycle-wsl.mjs      # start → stop → start, then clean up
-```
+## Documentation and feedback
 
-Live tests use temporary registries and a real WSL target. The HTTP test writes selected model configuration with backups. `e2e-wsl.mjs --install --start` also installs and launches the remote runtime. CI runs syntax checks and the two host-independent suites.
-
-Validated on Debian 12 (WSL2), Node v22.23.4 and dsh 0.2.1-rc.5: config porting, anonymous UI 200, cross-site WebSocket 101, API POST 200 and two start/stop rounds. The v0.1.2 archive also installed into an isolated DSH profile with its bundle, client and README images intact.
-
-The [diagram source](docs/figures/render.py) follows [ohmyplt](https://github.com/Lee-Eee-Eee/ohmyplt) conventions: Arial labels, Times New Roman math and numerals. Python and Matplotlib are needed only to regenerate the figures. PNG, editable SVG and a source-hash manifest are in `docs/assets/`.
-
-## Changelog
-
-### 0.1.2 · 2026-11-01
-
-- Add a real screenshot, setup and authentication diagrams, and version-pinned GitHub installation instructions in both languages.
-- Allow public bundle index discovery, include README images in the package and declare their marketplace order in `screenshots.json`.
-- Make the WSL cycle test fail with a nonzero exit and stop its second instance during cleanup.
-
-### 0.1.1
-
-- Rewrite Origin, Referer and Sec-Fetch-Site in the proxy so embedded API and WebSocket requests pass the remote fence.
+- [Technical reference](docs/architecture.en.md): connection architecture, authentication, configuration porting, file locations and troubleshooting.
+- [Contributing](CONTRIBUTING.md): local installation, validation commands and code organization.
+- [Changelog](CHANGELOG.md) · [Releases](https://github.com/Lee-Eee-Eee/dsh-remote/releases)
+- [Report a bug or suggest a change](https://github.com/Lee-Eee-Eee/dsh-remote/issues) with your DSH version, target type, reproduction steps and a sanitized error message.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+[MIT](LICENSE)

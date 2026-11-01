@@ -23,6 +23,9 @@
     "README.en.md",
     "screenshots.json",
     "docs/assets",
+    "docs/*.md",
+    "CONTRIBUTING.md",
+    "CHANGELOG.md",
     "LICENSE"
   ],
   "engines": {
