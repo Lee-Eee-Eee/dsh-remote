@@ -9,8 +9,8 @@ The repository is an installable DSH bundle. Host modules use ESM; the browser e
 Use Node `^22.19.0 || >=24` and a DSH host compatible with the package manifest.
 
 ```powershell
-git clone https://github.com/Lee-Eee-Eee/dsh-remote.git
-Set-Location dsh-remote
+git clone https://github.com/Lee-Eee-Eee/dsh-remote-dock.git
+Set-Location dsh-remote-dock
 dsh plugin --profile desktop add "$($PWD.Path)"
 ```
 

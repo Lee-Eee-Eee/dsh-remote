@@ -1,14 +1,14 @@
 <p align="center">
-  <img src="icon.svg" width="72" height="72" alt="dsh-remote">
+  <img src="icon.svg" width="72" height="72" alt="dsh-remote-dock">
 </p>
 
-<h1 align="center">dsh-remote</h1>
+<h1 align="center">dsh-remote-dock</h1>
 
 <p align="center">在 DeepSeek Harness 中使用 SSH 与 WSL 远程工作区</p>
 
 <p align="center">
-  <a href="https://github.com/Lee-Eee-Eee/dsh-remote/releases"><img src="https://img.shields.io/github/v/release/Lee-Eee-Eee/dsh-remote?label=release&amp;color=2563eb" alt="Release"></a>
-  <a href="https://github.com/Lee-Eee-Eee/dsh-remote/actions/workflows/ci.yml"><img src="https://github.com/Lee-Eee-Eee/dsh-remote/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/Lee-Eee-Eee/dsh-remote-dock/releases"><img src="https://img.shields.io/github/v/release/Lee-Eee-Eee/dsh-remote-dock?label=release&amp;color=2563eb" alt="Release"></a>
+  <a href="https://github.com/Lee-Eee-Eee/dsh-remote-dock/actions/workflows/ci.yml"><img src="https://github.com/Lee-Eee-Eee/dsh-remote-dock/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-64748b" alt="MIT license"></a>
 </p>
 
@@ -16,7 +16,7 @@
   简体中文 / <a href="README.en.md">English</a> · <a href="#安装">安装</a> · <a href="#首次连接">使用</a> · <a href="#文档与反馈">文档</a>
 </p>
 
-`dsh-remote` 为 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 添加「远程」入口。连接 Linux 服务器（SSH）或 WSL 发行版后，目标上的完整 DSH 界面会出现在本地主区；文件读写和命令执行都发生在目标环境中。
+`dsh-remote-dock` 为 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 添加「远程」入口。连接 Linux 服务器（SSH）或 WSL 发行版后，目标上的完整 DSH 界面会出现在本地主区；文件读写和命令执行都发生在目标环境中。
 
 ![远程工作区：左侧管理 SSH 与 WSL 目标，右侧使用远程 DSH](docs/assets/remote-workspace.png)
 
@@ -34,7 +34,7 @@
 需要 DSH `0.2.1-rc.2` 或更新版本。在插件管理器中添加以下来源：
 
 ```text
-github:Lee-Eee-Eee/dsh-remote#v0.1.4
+github:Lee-Eee-Eee/dsh-remote-dock#v0.1.5
 ```
 
 安装后重启 DSH 并刷新页面，侧栏会出现 **远程**。
@@ -45,12 +45,18 @@ github:Lee-Eee-Eee/dsh-remote#v0.1.4
 如果终端已能运行 `dsh`，可执行：
 
 ```sh
-dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote#v0.1.4"
+dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote-dock#v0.1.5"
 ```
 
 将 `desktop` 替换成宿主实际使用的 profile；网页版通常使用 `web`。安装到其他 profile 的插件不会出现在当前宿主中。
 
 </details>
+
+### 从旧名升级
+
+本项目现名为 **dsh-remote-dock**，原名为 `dsh-remote`。先在当前 profile 的插件管理器中移除旧版，再添加上面的新来源并重启 DSH；新旧两份应只启用一份。已保存的目标、远程安装和模型配置会继续使用。
+
+`dsh-remote-workspace@0.1.0-alpha.*` 是其他项目的旧 npm 包。本项目使用本页给出的 GitHub 来源安装。
 
 ## 首次连接
 
@@ -105,8 +111,8 @@ WSL 网络、主机密钥和内嵌认证问题见[技术参考中的排错](docs
 
 - [技术参考](docs/architecture.md)：连接架构、认证、配置移植、文件位置与排错。
 - [开发与测试](CONTRIBUTING.md)：本地安装、验证命令和代码组织。
-- [更新记录](CHANGELOG.md) · [发布版本](https://github.com/Lee-Eee-Eee/dsh-remote/releases)
-- [提交问题或建议](https://github.com/Lee-Eee-Eee/dsh-remote/issues)：请附 DSH 版本、目标类型、操作步骤及脱敏后的错误信息。
+- [更新记录](CHANGELOG.md) · [发布版本](https://github.com/Lee-Eee-Eee/dsh-remote-dock/releases)
+- [提交问题或建议](https://github.com/Lee-Eee-Eee/dsh-remote-dock/issues)：请附 DSH 版本、目标类型、操作步骤及脱敏后的错误信息。
 
 ## 许可
 

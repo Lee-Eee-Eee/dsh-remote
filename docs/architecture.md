@@ -105,6 +105,8 @@ API 密钥移植只处理 `refs`。账号凭据移植会排除 `client-connectio
 
 ## 数据位置
 
+仓库和安装包自 0.1.5 起更名为 `dsh-remote-dock`。下表中的 `dsh-remote` 文件名与远程路径，以及 `/api/dsh-remote` 路由和浏览器目标选择键继续沿用原值，以复用已有目标、远程进程和安装。
+
 | 位置 | 内容 |
 |---|---|
 | 本机 `~/.dsh/dsh-remote.json` | 保存的目标；不保存运行态 token、端口或隧道 |

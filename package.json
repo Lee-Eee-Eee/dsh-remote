@@ -1,6 +1,6 @@
 {
-  "name": "dsh-remote",
-  "version": "0.1.4",
+  "name": "dsh-remote-dock",
+  "version": "0.1.5",
   "private": false,
   "description": "Turn any SSH host or WSL distribution into a DSH workspace: discover targets, install dsh remotely without sudo, port the local model configuration, and drive the remote DSH UI inside a sidebar panel of the local one.",
   "type": "module",
@@ -66,11 +66,11 @@
   "author": "Lee-Eee-Eee",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lee-Eee-Eee/dsh-remote.git"
+    "url": "git+https://github.com/Lee-Eee-Eee/dsh-remote-dock.git"
   },
-  "homepage": "https://github.com/Lee-Eee-Eee/dsh-remote#readme",
+  "homepage": "https://github.com/Lee-Eee-Eee/dsh-remote-dock#readme",
   "bugs": {
-    "url": "https://github.com/Lee-Eee-Eee/dsh-remote/issues"
+    "url": "https://github.com/Lee-Eee-Eee/dsh-remote-dock/issues"
   },
   "license": "MIT"
 }

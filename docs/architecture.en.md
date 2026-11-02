@@ -105,6 +105,8 @@ A running instance can load the changes with Write and restart; an offline targe
 
 ## Data locations
 
+The repository and installable package are named `dsh-remote-dock` from 0.1.5 onward. The legacy `dsh-remote` paths below, `/api/dsh-remote` routes and selected-target storage key remain stable so existing targets, remote processes and installations can be reused.
+
 | Location | Content |
 |---|---|
 | Local `~/.dsh/dsh-remote.json` | Saved targets, excluding runtime tokens, ports and tunnels |

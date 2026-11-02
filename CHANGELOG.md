@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.5 — 2026-11-02
+
+- Rename the repository, package, bundle entry and browser module to `dsh-remote-dock` to distinguish this project from other remote plugins and the unrelated `dsh-remote-workspace` npm package.
+- Update both installation guides and marketplace links. Document removal of the old package before installing the renamed version.
+- Keep the existing `/api/dsh-remote` routes, saved-target file, selected-target key and remote working paths so existing targets and remote installations continue to work.
+
 ## 0.1.4 — 2026-11-02
 
 - Declare the DSH host range in top-level `engines.dsh` as well as the existing nested field so manifest readers can find it consistently. Document dshmarket 1.73.0's GitHub compatibility lookup and catalog refresh behavior.

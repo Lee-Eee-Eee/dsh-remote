@@ -1,14 +1,14 @@
 <p align="center">
-  <img src="icon.svg" width="72" height="72" alt="dsh-remote">
+  <img src="icon.svg" width="72" height="72" alt="dsh-remote-dock">
 </p>
 
-<h1 align="center">dsh-remote</h1>
+<h1 align="center">dsh-remote-dock</h1>
 
 <p align="center">SSH and WSL remote workspaces inside DeepSeek Harness</p>
 
 <p align="center">
-  <a href="https://github.com/Lee-Eee-Eee/dsh-remote/releases"><img src="https://img.shields.io/github/v/release/Lee-Eee-Eee/dsh-remote?label=release&amp;color=2563eb" alt="Release"></a>
-  <a href="https://github.com/Lee-Eee-Eee/dsh-remote/actions/workflows/ci.yml"><img src="https://github.com/Lee-Eee-Eee/dsh-remote/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/Lee-Eee-Eee/dsh-remote-dock/releases"><img src="https://img.shields.io/github/v/release/Lee-Eee-Eee/dsh-remote-dock?label=release&amp;color=2563eb" alt="Release"></a>
+  <a href="https://github.com/Lee-Eee-Eee/dsh-remote-dock/actions/workflows/ci.yml"><img src="https://github.com/Lee-Eee-Eee/dsh-remote-dock/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-64748b" alt="MIT license"></a>
 </p>
 
@@ -16,7 +16,7 @@
   <a href="README.md">简体中文</a> / English · <a href="#install">Install</a> · <a href="#first-connection">Usage</a> · <a href="#documentation-and-feedback">Docs</a>
 </p>
 
-`dsh-remote` adds a **Remote** entry to [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). Connect a Linux server over SSH or a WSL distribution and open its full DSH interface in your local window. File operations and commands run in the target environment.
+`dsh-remote-dock` adds a **Remote** entry to [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness). Connect a Linux server over SSH or a WSL distribution and open its full DSH interface in your local window. File operations and commands run in the target environment.
 
 ![Remote workspace with SSH and WSL targets on the left and the remote DSH interface on the right](docs/assets/remote-workspace.png)
 
@@ -34,7 +34,7 @@
 Requires DSH `0.2.1-rc.2` or newer. Add this source in the plugin manager:
 
 ```text
-github:Lee-Eee-Eee/dsh-remote#v0.1.4
+github:Lee-Eee-Eee/dsh-remote-dock#v0.1.5
 ```
 
 Restart DSH and refresh the page. **Remote** appears in the sidebar.
@@ -45,12 +45,18 @@ Restart DSH and refresh the page. **Remote** appears in the sidebar.
 If `dsh` is available in your terminal, run:
 
 ```sh
-dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote#v0.1.4"
+dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote-dock#v0.1.5"
 ```
 
 Replace `desktop` with the profile your host actually uses; web hosts typically use `web`. Installing into another profile will not add the plugin to the current host.
 
 </details>
+
+### Upgrading from the old name
+
+This project is now **dsh-remote-dock**, previously `dsh-remote`. Remove the old plugin from your current profile, add the new source above, and restart DSH. Enable only one copy. Saved targets, remote installations and model configuration remain available.
+
+`dsh-remote-workspace@0.1.0-alpha.*` belongs to a different project. Install this project using the GitHub source shown on this page.
 
 ## First connection
 
@@ -105,8 +111,8 @@ For WSL networking, host-key and embedded authentication issues, see [troublesho
 
 - [Technical reference](docs/architecture.en.md): connection architecture, authentication, configuration porting, file locations and troubleshooting.
 - [Contributing](CONTRIBUTING.md): local installation, validation commands and code organization.
-- [Changelog](CHANGELOG.md) · [Releases](https://github.com/Lee-Eee-Eee/dsh-remote/releases)
-- [Report a bug or suggest a change](https://github.com/Lee-Eee-Eee/dsh-remote/issues) with your DSH version, target type, reproduction steps and a sanitized error message.
+- [Changelog](CHANGELOG.md) · [Releases](https://github.com/Lee-Eee-Eee/dsh-remote-dock/releases)
+- [Report a bug or suggest a change](https://github.com/Lee-Eee-Eee/dsh-remote-dock/issues) with your DSH version, target type, reproduction steps and a sanitized error message.
 
 ## License
 

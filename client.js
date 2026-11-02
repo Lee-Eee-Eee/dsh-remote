@@ -1,5 +1,5 @@
 /**
- * dsh-remote — browser half.
+ * dsh-remote-dock — browser half.
  *
  * Registers two seats in the shell the same way the shipped panels do:
  *   - a row in `sidebar.panellist` (the "Remote" entry), whose id also
@@ -23,7 +23,7 @@
  * `127.0.0.1:<port>` authority the remote auth cookie was issued for.
  */
 window.__ModuleLoader__.load({
-  id: 'dsh-remote',
+  id: 'dsh-remote-dock',
   factory(require) {
     const React = require('react')
     const h = React.createElement
@@ -1173,7 +1173,7 @@ window.__ModuleLoader__.load({
       )
     }
 
-    const NS = 'dsh-remote'
+    const NS = 'dsh-remote-dock'
 
     return {
       inject: ['slots'],
@@ -1194,7 +1194,7 @@ window.__ModuleLoader__.load({
             const nextId = next?.locale ?? next?.id ?? next?.active ?? next?.language
             if (typeof nextId === 'string') setActiveLocale(normalizeLocale(nextId))
           })
-          if (typeof dispose === 'function') ctx.effect(() => dispose, 'dsh-remote: locale binding')
+          if (typeof dispose === 'function') ctx.effect(() => dispose, 'dsh-remote-dock: locale binding')
         } catch {
           try {
             if (typeof navigator !== 'undefined') setActiveLocale(normalizeLocale(navigator.language))
