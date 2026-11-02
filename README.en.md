@@ -56,12 +56,21 @@ Replace `desktop` with the profile your host actually uses; web hosts typically 
 
 1. **Add a target.** Open **Remote** and click **+** beside an SSH host or WSL distribution. Use **Add target** to enter an SSH alias or host details manually.
 2. **Probe the environment.** Select the target and click **Probe**. If Node or DSH is missing, open **Review install plan**, choose the steps and start installation.
+
+   ![Probe result: OS, Node, dsh, tmux, disk and CPU](docs/assets/fig-probe.png)
+
 3. **Configure a model.** If the remote has no model configuration, open **Port local config**, select the provider, default-model and API-key groups you need, then click **Write and restart**. The API-key group copies actual secret values, so use a target you trust. Skip this step when the remote already has a working model.
-4. **Connect.** Click **Connect**, then choose a remote project in the embedded DSH interface and start working.
+4. **Connect.** Click **Connect**, then choose a remote project in the embedded DSH interface and start working. The right-hand pane is the target's own DSH, running with the model configuration you ported.
+
+   ![Connected: target list and the embedded remote DSH](docs/assets/fig-connect.png)
 
 Configuration previews show names and counts only, and local browser-session credentials are excluded from porting. Remote conversations and projects are managed inside the embedded DSH interface.
 
 ### Once connected
+
+Several targets can stay connected at the same time, each independent: switching targets switches which machine's DSH you are looking at.
+
+![Multiple targets at once](docs/assets/fig-multi.png)
 
 | Action | Effect |
 |---|---|
