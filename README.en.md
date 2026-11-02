@@ -34,7 +34,7 @@
 Requires DSH `0.2.1-rc.2` or newer. Add this source in the plugin manager:
 
 ```text
-github:Lee-Eee-Eee/dsh-remote#v0.1.3
+github:Lee-Eee-Eee/dsh-remote#v0.1.4
 ```
 
 Restart DSH and refresh the page. **Remote** appears in the sidebar.
@@ -45,7 +45,7 @@ Restart DSH and refresh the page. **Remote** appears in the sidebar.
 If `dsh` is available in your terminal, run:
 
 ```sh
-dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote#v0.1.3"
+dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote#v0.1.4"
 ```
 
 Replace `desktop` with the profile your host actually uses; web hosts typically use `web`. Installing into another profile will not add the plugin to the current host.
@@ -83,6 +83,7 @@ Several targets can stay connected at the same time, each independent: switching
 
 | Environment | Requirement |
 |---|---|
+| DSH host | `0.2.1-rc.2` or newer |
 | Host runtime | Node `22.x` (≥ `22.19.0`), or `24` and newer |
 | SSH target | Linux x86_64 / arm64 with non-interactive key or agent authentication |
 | Automatic setup | `bash`, `tar`, and either `curl` or `wget` |
@@ -95,6 +96,8 @@ Several targets can stay connected at the same time, each independent: switching
 **SSH connection fails?** Verify that `ssh <alias>` works without an interactive prompt and that the server permits SSH port forwarding. Password prompts are unsupported.
 
 **The interface opens but the model does not work?** Check the remote model configuration. After applying **Port local config**, restart remote DSH.
+
+**Unknown host requirement or old screenshots in the market?** Use dshmarket `1.73.0` or newer to read GitHub plugins' host requirements. Screenshots refresh with catalog builds. See [marketplace metadata](docs/architecture.en.md#marketplace-metadata).
 
 For WSL networking, host-key and embedded authentication issues, see [troubleshooting](docs/architecture.en.md#troubleshooting).
 

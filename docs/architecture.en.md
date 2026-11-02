@@ -130,3 +130,13 @@ A running instance can load the changes with Write and restart; an offline targe
 | Installation action is missing | Run Probe first; an environment with Node and dsh already installed needs no installation |
 
 Source entry points: [channel.js](../lib/channel.js) · [probe.js](../lib/probe.js) · [bootstrap.js](../lib/bootstrap.js) · [paths.js](../lib/paths.js)
+
+## Marketplace metadata
+
+The host requirement is declared in `package.json` under `engines.dsh`. The same range remains under `dsh.engines.dsh` for existing readers: `>=0.2.1-rc.2`. This applies to the local DSH host; probing checks the target's remote DSH separately.
+
+Older dshmarket versions look up host requirements only for npm plugins and show an unknown requirement for GitHub sources. [dshmarket 1.73.0](https://github.com/dsh-market/dsh-market/releases/tag/v1.73.0) added GitHub manifest lookup. Update the market and reopen it. A failed manifest request can still leave the requirement unknown; check connectivity. If the host version cannot be read, the declared range can be displayed while compatibility remains unknown.
+
+The root `screenshots.json` orders the marketplace carousel: connected workspace, environment probe, multiple targets, original desktop screenshot, setup workflow and connection architecture. Catalog builds read repository HEAD. Editing the README does not override an explicitly declared screenshot list.
+
+After pushing changes, wait for the next community catalog build to refresh images. China routes also depend on publication and mirror synchronization of `dsh-plugin-catalog`. If old images persist, temporarily select Global under dshmarket's download-region setting and reopen the market to read the website catalog. This setting also changes subsequent plugin download routes.

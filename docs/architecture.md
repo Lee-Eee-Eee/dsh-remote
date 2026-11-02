@@ -130,3 +130,13 @@ API 密钥移植只处理 `refs`。账号凭据移植会排除 `client-connectio
 | 没有安装入口 | 先运行「探测环境」；环境已有 Node 和 dsh 时无需安装 |
 
 源文件入口：[channel.js](../lib/channel.js) · [probe.js](../lib/probe.js) · [bootstrap.js](../lib/bootstrap.js) · [paths.js](../lib/paths.js)
+
+## 市场展示信息
+
+宿主版本要求在 `package.json` 的 `engines.dsh` 中声明；`dsh.engines.dsh` 保留相同范围以兼容已有读取方式。两处均为 `>=0.2.1-rc.2`。这是运行插件的本地 DSH 要求，目标上的远程 DSH 由环境探测单独检查。
+
+旧版 dshmarket 只为 npm 插件查询宿主要求，GitHub 来源会显示「宿主要求未知」。[dshmarket 1.73.0](https://github.com/dsh-market/dsh-market/releases/tag/v1.73.0) 开始读取 GitHub 插件的清单。更新市场后重新打开；读取清单失败时仍会显示「宿主要求未知」，应检查网络。宿主版本无法识别时，可以展示声明范围，但无法判断是否兼容。
+
+市场轮播图按仓库根目录 `screenshots.json` 的顺序展示：连接效果、环境探测、多目标、原始桌面截图、使用流程和连接架构。市场构建读取仓库 HEAD；修改 README 本身不会覆盖已声明的截图清单。
+
+仓库推送后，等待社区目录的下一次构建同步图片。国内线路使用的 `dsh-plugin-catalog` 还需完成目录包发布与镜像同步；若仍看到旧图，可在 dshmarket 配置中暂将「下载区域」切为「全球」，重新打开市场读取官网目录。此设置也会切换后续插件下载线路。

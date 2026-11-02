@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.4 — 2026-11-02
+
+- Declare the DSH host range in top-level `engines.dsh` as well as the existing nested field so manifest readers can find it consistently. Document dshmarket 1.73.0's GitHub compatibility lookup and catalog refresh behavior.
+- Put the annotated connection, environment-probe and multiple-target images first in the marketplace carousel; include all six screenshots in the release package.
+- Add an explicit DSH host row to both README requirement tables.
+
 ## 0.1.3 — 2026-11-01
 
 - Exclude `client-connection/browser-session` and its payload even when account credentials are selected. Filter at preview and write boundaries, skip unrecognized account structures, and preserve independent API-key porting.

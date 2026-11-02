@@ -1,6 +1,6 @@
 {
   "name": "dsh-remote",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": false,
   "description": "Turn any SSH host or WSL distribution into a DSH workspace: discover targets, install dsh remotely without sudo, port the local model configuration, and drive the remote DSH UI inside a sidebar panel of the local one.",
   "type": "module",
@@ -29,7 +29,8 @@
     "LICENSE"
   ],
   "engines": {
-    "node": "^22.19.0 || >=24.0.0"
+    "node": "^22.19.0 || >=24.0.0",
+    "dsh": ">=0.2.1-rc.2"
   },
   "dsh": {
     "engines": {

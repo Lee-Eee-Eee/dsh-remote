@@ -34,7 +34,7 @@
 需要 DSH `0.2.1-rc.2` 或更新版本。在插件管理器中添加以下来源：
 
 ```text
-github:Lee-Eee-Eee/dsh-remote#v0.1.3
+github:Lee-Eee-Eee/dsh-remote#v0.1.4
 ```
 
 安装后重启 DSH 并刷新页面，侧栏会出现 **远程**。
@@ -45,7 +45,7 @@ github:Lee-Eee-Eee/dsh-remote#v0.1.3
 如果终端已能运行 `dsh`，可执行：
 
 ```sh
-dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote#v0.1.3"
+dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote#v0.1.4"
 ```
 
 将 `desktop` 替换成宿主实际使用的 profile；网页版通常使用 `web`。安装到其他 profile 的插件不会出现在当前宿主中。
@@ -83,6 +83,7 @@ dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote#v0.1.3"
 
 | 环境 | 要求 |
 |---|---|
+| DSH 宿主 | `0.2.1-rc.2` 或更新版本 |
 | 宿主运行环境 | Node `22.x`（≥ `22.19.0`），或 `24` 及以上 |
 | SSH 目标 | Linux x86_64 / arm64，使用密钥或 agent 免交互登录 |
 | 自动安装环境 | `bash`、`tar`，以及 `curl` 或 `wget` |
@@ -95,6 +96,8 @@ dsh plugin --profile desktop add "github:Lee-Eee-Eee/dsh-remote#v0.1.3"
 **SSH 连接失败？** 先在本机终端确认 `ssh <别名>` 可以免交互登录，并且服务器允许 SSH 端口转发。密码提示不受支持。
 
 **界面能打开，但模型无法使用？** 检查远程模型配置；使用「移植本地配置」写入后，重启远程 DSH。
+
+**市场显示「宿主要求未知」或旧截图？** 使用 dshmarket `1.73.0` 或更新版本识别 GitHub 插件的宿主要求；截图随市场目录构建同步。见[市场展示信息](docs/architecture.md#市场展示信息)。
 
 WSL 网络、主机密钥和内嵌认证问题见[技术参考中的排错](docs/architecture.md#排错)。
 
